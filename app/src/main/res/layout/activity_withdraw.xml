@@ -77,7 +77,7 @@
         android:textAlignment="gravity"
         app:cardCornerRadius="50dp"
         app:cardElevation="3dp"
-        app:layout_constraintEnd_toStartOf="@+id/withdraw_option_3"
+        app:layout_constraintEnd_toStartOf="@+id/withdraw_option_2"
         app:layout_constraintStart_toStartOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/textView11">
 
@@ -92,14 +92,14 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/withdraw_option_2"
+        android:id="@+id/withdraw_option_3"
         android:layout_width="0dp"
         android:layout_height="48dp"
         app:cardCornerRadius="50dp"
         app:cardElevation="3dp"
         app:layout_constraintEnd_toEndOf="@+id/textView11"
-        app:layout_constraintStart_toEndOf="@+id/withdraw_option_3"
-        app:layout_constraintTop_toTopOf="@+id/withdraw_option_3">
+        app:layout_constraintStart_toEndOf="@+id/withdraw_option_2"
+        app:layout_constraintTop_toTopOf="@+id/withdraw_option_2">
 
         <TextView
             android:id="@+id/option_3"
@@ -112,14 +112,14 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/withdraw_option_3"
+        android:id="@+id/withdraw_option_2"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         app:cardCornerRadius="50dp"
         app:cardElevation="3dp"
-        app:layout_constraintEnd_toStartOf="@+id/withdraw_option_2"
+        app:layout_constraintEnd_toStartOf="@+id/withdraw_option_3"
         app:layout_constraintStart_toEndOf="@+id/withdraw_option_1"
         app:layout_constraintTop_toTopOf="@+id/withdraw_option_1">
 

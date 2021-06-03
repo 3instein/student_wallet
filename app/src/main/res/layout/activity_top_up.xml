@@ -70,14 +70,14 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/withdraw_option_1"
+        android:id="@+id/topUp_option_1"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:textAlignment="gravity"
         app:cardCornerRadius="50dp"
         app:cardElevation="3dp"
-        app:layout_constraintEnd_toStartOf="@+id/withdraw_option_3"
+        app:layout_constraintEnd_toStartOf="@+id/topUp_option_2"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
@@ -92,16 +92,16 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/withdraw_option_3"
+        android:id="@+id/topUp_option_2"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         app:cardCornerRadius="50dp"
         app:cardElevation="3dp"
-        app:layout_constraintEnd_toStartOf="@+id/withdraw_option_2"
-        app:layout_constraintStart_toEndOf="@+id/withdraw_option_1"
-        app:layout_constraintTop_toTopOf="@+id/withdraw_option_1">
+        app:layout_constraintEnd_toStartOf="@+id/topUp_option_3"
+        app:layout_constraintStart_toEndOf="@+id/topUp_option_1"
+        app:layout_constraintTop_toTopOf="@+id/topUp_option_1">
 
         <TextView
             android:id="@+id/option_2"
@@ -114,14 +114,14 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/withdraw_option_2"
+        android:id="@+id/topUp_option_3"
         android:layout_width="0dp"
         android:layout_height="48dp"
         app:cardCornerRadius="50dp"
         app:cardElevation="3dp"
         app:layout_constraintEnd_toEndOf="@+id/textView7"
-        app:layout_constraintStart_toEndOf="@+id/withdraw_option_3"
-        app:layout_constraintTop_toTopOf="@+id/withdraw_option_3">
+        app:layout_constraintStart_toEndOf="@+id/topUp_option_2"
+        app:layout_constraintTop_toTopOf="@+id/topUp_option_2">
 
         <TextView
             android:id="@+id/option_3"
@@ -141,8 +141,8 @@
         android:layout_marginEnd="32dp"
         android:text="Nominal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/withdraw_option_1"
-        app:layout_constraintTop_toBottomOf="@+id/withdraw_option_1" />
+        app:layout_constraintStart_toStartOf="@+id/topUp_option_1"
+        app:layout_constraintTop_toBottomOf="@+id/topUp_option_1" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/withdraw_input_nominal"
