@@ -1,5 +1,6 @@
 package com.uc.studentwallet;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -14,8 +16,10 @@ import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
+    private Intent intent;
     private View view;
     private TextView home_username, home_card_nim, home_card_full_name, home_card_balance;
+    private ImageView home_topUp_btn, home_transfer_btn, home_history_btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,19 +28,37 @@ public class HomeFragment extends Fragment {
 
         Bundle data = getArguments();
 
-        Locale localeId = new Locale("in", "ID");
-
-        NumberFormat format = NumberFormat.getCurrencyInstance(localeId);
-
-        double balance = (double) data.getInt("balance");
-        String formattedBalance = format.format(balance);
-
         if (data != null) {
             home_username.setText(data.getString("username"));
             home_card_nim.setText(String.valueOf(data.getInt("nim")));
-            home_card_balance.setText(formattedBalance);
+            home_card_balance.setText(formatter((double) MainActivity.balance));
             home_card_full_name.setText(data.getString("full_name"));
         }
+
+        home_topUp_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(view.getContext(), TopUpActivity.class);
+                intent.putExtra("balance", MainActivity.balance);
+                startActivity(intent);
+            }
+        });
+
+        home_transfer_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(view.getContext(), TransferActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        home_history_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(view.getContext(), HistoryActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
@@ -46,5 +68,17 @@ public class HomeFragment extends Fragment {
         home_card_nim = view.findViewById(R.id.home_card_nim);
         home_card_full_name = view.findViewById(R.id.home_card_full_name);
         home_card_balance = view.findViewById(R.id.home_card_balance);
+        home_topUp_btn = view.findViewById(R.id.home_topUp_btn);
+        home_transfer_btn = view.findViewById(R.id.home_transfer_btn);
+        home_history_btn = view.findViewById(R.id.home_history_btn);
+    }
+
+    public static String formatter(double balance) {
+        Locale localeId = new Locale("in", "ID");
+        NumberFormat format = NumberFormat.getCurrencyInstance(localeId);
+
+        String formattedBalance = format.format(balance);
+
+        return formattedBalance;
     }
 }

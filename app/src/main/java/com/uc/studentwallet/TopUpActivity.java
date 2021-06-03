@@ -2,6 +2,7 @@ package com.uc.studentwallet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 public class TopUpActivity extends AppCompatActivity {
 
+    private Intent intent;
     private TextView user_balance, option_1, option_2, option_3;
     private TextInputLayout topUp_input_nominal;
     private Button topUp_btn;
@@ -32,6 +34,9 @@ public class TopUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_up);
         initComponent();
+
+        intent = getIntent();
+        user_balance.setText(HomeFragment.formatter((double) intent.getIntExtra("balance", 0)));
 
         topUp_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +77,7 @@ public class TopUpActivity extends AppCompatActivity {
         option_1 = findViewById(R.id.option_1);
         option_2 = findViewById(R.id.option_2);
         option_3 = findViewById(R.id.option_3);
-        topUp_input_nominal = findViewById(R.id.withdraw_input_nominal);
+        topUp_input_nominal = findViewById(R.id.topUp_input_nominal);
         topUp_btn = findViewById(R.id.topUp_btn);
     }
 
