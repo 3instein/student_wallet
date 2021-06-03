@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
                 if (item.getItemId() == R.id.nav_home) {
                     fragment = new HomeFragment();
+                    Bundle data = new Bundle();
+                    data.putInt("id", id);
+                    data.putString("username", username);
+
+                    fragment.setArguments(data);
                 } else if (item.getItemId() == R.id.nav_finance) {
 
                 } else if (item.getItemId() == R.id.nav_profile) {

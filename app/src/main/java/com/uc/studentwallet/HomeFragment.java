@@ -19,6 +19,12 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         initComponent();
 
+        Bundle data = new Bundle();
+
+        if (data != null) {
+            home_username.setText(data.getString("username"));
+        }
+
         return view;
     }
 
