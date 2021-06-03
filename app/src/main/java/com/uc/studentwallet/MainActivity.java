@@ -3,6 +3,7 @@ package com.uc.studentwallet;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,11 +15,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
-    static int id = 0;
-    static int balance = 0;
-    static String nim = "", username = "";
+    static int id = 0, balance = 0, nim;
+    static String username = "", full_name = "";
 
     private Intent intent;
+    private Fragment fragment;
     private BottomNavigationView main_bottom_nav;
 
     @Override
@@ -28,16 +29,28 @@ public class MainActivity extends AppCompatActivity {
         initValue();
         initComponent();
 
+        fragment = new HomeFragment();
+        Bundle data = new Bundle();
+        data.putInt("id", id);
+        data.putInt("nim", nim);
+        data.putInt("balance", balance);
+        data.putString("username", username);
+        data.putString("full_name", full_name);
+
+        fragment.setArguments(data);
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, fragment).commit();
+
         main_bottom_nav.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull @NotNull MenuItem item) {
-                Fragment fragment = null;
-
                 if (item.getItemId() == R.id.nav_home) {
                     fragment = new HomeFragment();
                     Bundle data = new Bundle();
                     data.putInt("id", id);
+                    data.putInt("nim", nim);
+                    data.putInt("balance", balance);
                     data.putString("username", username);
+                    data.putString("full_name", full_name);
 
                     fragment.setArguments(data);
                 } else if (item.getItemId() == R.id.nav_finance) {
@@ -54,12 +67,13 @@ public class MainActivity extends AppCompatActivity {
         intent = getIntent();
         id = intent.getIntExtra("id", 0);
         balance = intent.getIntExtra("balance", 0);
-        nim = String.valueOf(intent.getIntExtra("nim", 0));
-        username = String.valueOf(intent.getIntExtra("username", 0));
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, new HomeFragment()).commit();
+        nim = intent.getIntExtra("nim", 0);
+        username = intent.getStringExtra("username");
+        full_name = intent.getStringExtra("full_name");
     }
 
     private void initComponent() {
+        fragment = null;
         main_bottom_nav = findViewById(R.id.main_bottom_nav);
     }
 }

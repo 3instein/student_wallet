@@ -96,9 +96,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (message.equals("success")) {
                         intent = new Intent(getBaseContext(), MainActivity.class);
                         intent.putExtra("id", userDetail.getInt("id"));
-                        intent.putExtra("full_name", userDetail.getString("full_name"));
                         intent.putExtra("balance", userDetail.getInt("balance"));
                         intent.putExtra("nim", userDetail.getInt("nim"));
+                        intent.putExtra("full_name", userDetail.getString("full_name"));
                         intent.putExtra("username", userDetail.getString("username"));
                         startActivity(intent);
                         finish();

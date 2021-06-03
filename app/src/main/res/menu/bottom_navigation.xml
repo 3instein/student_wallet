@@ -4,6 +4,7 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_baseline_home_24"
+        android:iconTint="@color/primary_button"
         android:title="Home" />
 
     <item

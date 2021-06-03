@@ -83,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.equalsIgnoreCase("Registered!")) {
+                if (response.equalsIgnoreCase("success")) {
                     Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT).show();
 
                     intent = new Intent(getBaseContext(), LoginActivity.class);
