@@ -16,9 +16,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -72,34 +76,46 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login(User user) {
         String url = "http://student.hackerexperience.net/login.php";
+
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT).show();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", user.getUsername());
+            jsonObject.put("password", user.getPassword());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-                if (response.equalsIgnoreCase("Login success!")) {
-                    intent = new Intent(getBaseContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject userDetail = response.getJSONObject("userDetail");
+                    String message = userDetail.getString("message");
+                    if(message.equals("success")){
+                        intent = new Intent(getBaseContext(), MainActivity.class);
+                        intent.putExtra("id", userDetail.getInt("id"));
+                        intent.putExtra("full_name", userDetail.getString("full_name"));
+                        intent.putExtra("balance", userDetail.getInt("balance"));
+                        startActivity(intent);
+                        finish();
+                    } else if(message.equals("invalid")){
+                        Toast.makeText(getBaseContext(), "Wrong Username / Password!", Toast.LENGTH_SHORT).show();
+                    } else if(message.equals("no data")){
+                        Toast.makeText(getBaseContext(), "Account not found!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getBaseContext(), "" + error, Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> data = new HashMap<>();
-                data.put("username", user.getUsername());
-                data.put("password", user.getPassword());
+        });
 
-                return data;
-            }
-        };
-        requestQueue.add(stringRequest);
+        requestQueue.add(jsonObjectRequest);
     }
 }
