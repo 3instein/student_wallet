@@ -93,17 +93,18 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     JSONObject userDetail = response.getJSONObject("userDetail");
                     String message = userDetail.getString("message");
-                    if(message.equals("success")){
+                    if (message.equals("success")) {
                         intent = new Intent(getBaseContext(), MainActivity.class);
                         intent.putExtra("id", userDetail.getInt("id"));
                         intent.putExtra("full_name", userDetail.getString("full_name"));
                         intent.putExtra("balance", userDetail.getInt("balance"));
                         intent.putExtra("nim", userDetail.getInt("nim"));
+                        intent.putExtra("username", userDetail.getString("username"));
                         startActivity(intent);
                         finish();
-                    } else if(message.equals("invalid")){
+                    } else if (message.equals("invalid")) {
                         Toast.makeText(getBaseContext(), "Wrong Username / Password!", Toast.LENGTH_SHORT).show();
-                    } else if(message.equals("no data")){
+                    } else if (message.equals("no data")) {
                         Toast.makeText(getBaseContext(), "Account not found!", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {

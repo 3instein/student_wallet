@@ -83,7 +83,10 @@ public class TopUpActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT).show();
+                if (response.equalsIgnoreCase("success")) {
+                    Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
