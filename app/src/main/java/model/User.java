@@ -2,12 +2,13 @@ package model;
 
 public class User {
     private int user_id;
-    private String username;
-    private String password;
+    private String nim, full_name, username, email, password;
 
-    public User(int user_id, String username, String password) {
-        this.user_id = user_id;
+    public User(String nim, String full_name, String username, String email, String password) {
+        this.nim = nim;
+        this.full_name = full_name;
         this.username = username;
+        this.email = email;
         this.password = password;
     }
 
@@ -38,5 +39,29 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNim() {
+        return nim;
+    }
+
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
+
+    public String getFull_name() {
+        return full_name;
+    }
+
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
