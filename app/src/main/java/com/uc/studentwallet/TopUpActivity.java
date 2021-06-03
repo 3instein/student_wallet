@@ -1,6 +1,5 @@
 package com.uc.studentwallet;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -20,8 +19,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import model.User;
 
 public class TopUpActivity extends AppCompatActivity {
 
@@ -75,7 +72,7 @@ public class TopUpActivity extends AppCompatActivity {
         option_1 = findViewById(R.id.option_1);
         option_2 = findViewById(R.id.option_2);
         option_3 = findViewById(R.id.option_3);
-        topUp_input_nominal = findViewById(R.id.topUp_input_nominal);
+        topUp_input_nominal = findViewById(R.id.withdraw_input_nominal);
         topUp_btn = findViewById(R.id.topUp_btn);
     }
 

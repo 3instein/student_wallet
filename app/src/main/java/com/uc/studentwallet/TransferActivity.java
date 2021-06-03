@@ -31,7 +31,7 @@ public class TransferActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer);
-        initView();
+        initComponent();
 
         transfer_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,9 +70,9 @@ public class TransferActivity extends AppCompatActivity {
 
     }
 
-    private void initView() {
+    private void initComponent() {
         transfer_input_target = findViewById(R.id.transfer_input_target);
-        transfer_input_nominal = findViewById(R.id.topUp_input_nominal);
+        transfer_input_nominal = findViewById(R.id.withdraw_input_nominal);
         option1 = findViewById(R.id.option_1);
         option2 = findViewById(R.id.option_2);
         option3 = findViewById(R.id.option_3);
