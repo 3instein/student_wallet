@@ -98,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("id", userDetail.getInt("id"));
                         intent.putExtra("full_name", userDetail.getString("full_name"));
                         intent.putExtra("balance", userDetail.getInt("balance"));
+                        intent.putExtra("nim", userDetail.getInt("nim"));
                         startActivity(intent);
                         finish();
                     } else if(message.equals("invalid")){
