@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -50,6 +52,56 @@ public class LoginActivity extends AppCompatActivity {
                 String password = login_input_password.getEditText().getText().toString().trim();
                 User existingUser = new User(username, password);
                 login(existingUser);
+            }
+        });
+
+        login_input_username.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String username = login_input_username.getEditText().getText().toString().trim();
+
+                if(username.isEmpty()){
+                    login_input_username.setError("Username cannot be empty!");
+                    login_btn.setEnabled(false);
+                }else{
+                    login_input_username.setError("");
+                    login_btn.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        login_input_password.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String password = login_input_password.getEditText().getText().toString().trim();
+
+                if(password.isEmpty()){
+                    login_input_password.setError("Password cannot be empty!");
+                    login_btn.setEnabled(false);
+                }else{
+                    login_input_password.setError("");
+                    login_btn.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
