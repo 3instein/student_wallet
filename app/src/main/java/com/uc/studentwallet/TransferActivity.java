@@ -24,10 +24,10 @@ import java.util.Map;
 public class TransferActivity extends AppCompatActivity {
 
 
-    Button transfer_btn;
-    TextInputLayout transfer_input_target, transfer_input_nominal;
-    TextView option1, option2, option3;
-    int transfer_nominal = 0;
+    private Button transfer_btn;
+    private TextInputLayout transfer_input_target, transfer_input_nominal;
+    private TextView option1, option2, option3;
+    private int transfer_nominal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class TransferActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String target = transfer_input_target.getEditText().getText().toString().trim();
-                int transfer_nominal = Integer.parseInt(transfer_input_nominal.getEditText().getText().toString().trim());
+                transfer_nominal = Integer.parseInt(transfer_input_nominal.getEditText().getText().toString().trim());
                 if(MainActivity.balance - 10000 > transfer_nominal){
                     transfer(target, String.valueOf(transfer_nominal), MainActivity.id);
                     MainActivity.balance -= transfer_nominal;
