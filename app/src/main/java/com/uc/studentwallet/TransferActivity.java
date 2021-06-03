@@ -2,7 +2,6 @@ package com.uc.studentwallet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +22,6 @@ import java.util.Map;
 
 public class TransferActivity extends AppCompatActivity {
 
-
     private Button transfer_btn;
     private TextInputLayout transfer_input_target, transfer_input_nominal;
     private TextView option1, option2, option3;
@@ -39,8 +37,8 @@ public class TransferActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String target = transfer_input_target.getEditText().getText().toString().trim();
-                transfer_nominal = Integer.parseInt(transfer_input_nominal.getEditText().getText().toString().trim());
-                if(MainActivity.balance - 10000 > transfer_nominal){
+                int transfer_nominal = Integer.parseInt(transfer_input_nominal.getEditText().getText().toString().trim());
+                if (MainActivity.balance - 10000 > transfer_nominal) {
                     transfer(target, String.valueOf(transfer_nominal), MainActivity.id);
                     MainActivity.balance -= transfer_nominal;
                 } else {
@@ -72,16 +70,16 @@ public class TransferActivity extends AppCompatActivity {
 
     }
 
-    public void initView(){
+    private void initView() {
         transfer_input_target = findViewById(R.id.transfer_input_target);
-        transfer_input_nominal = findViewById(R.id.transfer_input_nominal);
+        transfer_input_nominal = findViewById(R.id.topUp_input_nominal);
         option1 = findViewById(R.id.option_1);
         option2 = findViewById(R.id.option_2);
         option3 = findViewById(R.id.option_3);
         transfer_btn = findViewById(R.id.transfer_btn);
     }
 
-    public void transfer(String target, String transfer_nominal, int id){
+    private void transfer(String target, String transfer_nominal, int id) {
         String url = "http://student.hackerexperience.net/transfer.php";
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 

@@ -145,7 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/topUp_option_1" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/transfer_input_nominal"
+        android:id="@+id/topUp_input_nominal"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -180,6 +180,6 @@
         android:textStyle="bold"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/transfer_input_nominal"
-        app:layout_constraintStart_toStartOf="@+id/transfer_input_nominal" />
+        app:layout_constraintEnd_toEndOf="@+id/topUp_input_nominal"
+        app:layout_constraintStart_toStartOf="@+id/topUp_input_nominal" />
 </androidx.constraintlayout.widget.ConstraintLayout>
