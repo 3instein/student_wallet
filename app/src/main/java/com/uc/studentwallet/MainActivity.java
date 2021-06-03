@@ -3,15 +3,25 @@ package com.uc.studentwallet;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     static String username = "", full_name = "";
 
     private Intent intent;
-    private Fragment fragment;
     private BottomNavigationView main_bottom_nav;
 
     @Override
@@ -29,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         initValue();
         initComponent();
 
-        fragment = new HomeFragment();
         Bundle data = new Bundle();
         data.putInt("id", id);
         data.putInt("nim", nim);
@@ -37,28 +45,34 @@ public class MainActivity extends AppCompatActivity {
         data.putString("username", username);
         data.putString("full_name", full_name);
 
+        Fragment fragment = new HomeFragment();
         fragment.setArguments(data);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, fragment).commit();
 
-        main_bottom_nav.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+        main_bottom_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull @NotNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+                Fragment newFragment = null;
+                getBalance();
+
                 if (item.getItemId() == R.id.nav_home) {
-                    fragment = new HomeFragment();
+                    newFragment = new HomeFragment();
                     Bundle data = new Bundle();
+
                     data.putInt("id", id);
                     data.putInt("nim", nim);
                     data.putInt("balance", balance);
                     data.putString("username", username);
                     data.putString("full_name", full_name);
-
-                    fragment.setArguments(data);
+                    newFragment.setArguments(data);
                 } else if (item.getItemId() == R.id.nav_finance) {
-
+                    newFragment = new FinanceFragment();
                 } else if (item.getItemId() == R.id.nav_profile) {
 
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, fragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, newFragment).commit();
+
+                return true;
             }
         });
     }
@@ -73,7 +87,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initComponent() {
-        fragment = null;
         main_bottom_nav = findViewById(R.id.main_bottom_nav);
+    }
+
+    private void getBalance() {
+        String url = "http://student.hackerexperience.net/balance.php";
+        RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                balance = Integer.parseInt(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getBaseContext(), "" + error, Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> data = new HashMap<>();
+                data.put("id", String.valueOf(id));
+
+                return data;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 }

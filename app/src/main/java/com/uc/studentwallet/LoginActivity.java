@@ -65,10 +65,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String username = login_input_username.getEditText().getText().toString().trim();
 
-                if(username.isEmpty()){
+                if (username.isEmpty()) {
                     login_input_username.setError("Username cannot be empty!");
                     login_btn.setEnabled(false);
-                }else{
+                } else {
                     login_input_username.setError("");
                     login_btn.setEnabled(true);
                 }
@@ -90,10 +90,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String password = login_input_password.getEditText().getText().toString().trim();
 
-                if(password.isEmpty()){
+                if (password.isEmpty()) {
                     login_input_password.setError("Password cannot be empty!");
                     login_btn.setEnabled(false);
-                }else{
+                } else {
                     login_input_password.setError("");
                     login_btn.setEnabled(true);
                 }
