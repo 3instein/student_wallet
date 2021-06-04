@@ -95,8 +95,10 @@ public class TransferActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.equalsIgnoreCase("Success")) {
+                if (response.equalsIgnoreCase("success")) {
                     Toast.makeText(getBaseContext(), "Transfer Success", Toast.LENGTH_SHORT).show();
+                } else if(response.equalsIgnoreCase("invalid nim")){
+                    Toast.makeText(getBaseContext(), "Invalid Student ID", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
