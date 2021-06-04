@@ -16,6 +16,7 @@ public class ForgotActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot2);
+        initComponent();
     }
 
     private void initComponent() {
