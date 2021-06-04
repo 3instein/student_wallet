@@ -17,9 +17,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
         app:title="History"
+        app:titleMarginStart="64dp"
         app:titleTextColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/history_back_btn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_recyclerView"

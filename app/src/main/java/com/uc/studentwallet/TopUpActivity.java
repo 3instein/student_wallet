@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -27,6 +29,7 @@ public class TopUpActivity extends AppCompatActivity {
     private TextView user_balance, option_1, option_2, option_3;
     private TextInputLayout topUp_input_nominal;
     private Button topUp_btn;
+    private ImageView topUp_back_btn;
     private int topUp_nominal;
 
     @Override
@@ -37,6 +40,13 @@ public class TopUpActivity extends AppCompatActivity {
 
         intent = getIntent();
         user_balance.setText(HomeFragment.formatter((double) intent.getIntExtra("balance", 0)));
+
+        topUp_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         topUp_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +89,7 @@ public class TopUpActivity extends AppCompatActivity {
         option_3 = findViewById(R.id.option_3);
         topUp_input_nominal = findViewById(R.id.topUp_input_nominal);
         topUp_btn = findViewById(R.id.topUp_btn);
+        topUp_back_btn = findViewById(R.id.topUp_back_btn);
     }
 
     private void topUp(String topUp_nominal) {

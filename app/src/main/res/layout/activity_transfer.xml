@@ -30,9 +30,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                 app:title="Transfer"
+                app:titleMarginStart="64dp"
                 app:titleTextColor="@color/black" />
+
+            <ImageView
+                android:id="@+id/transfer_back_btn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -237,24 +247,23 @@
                     android:textColorHint="#D3D3D3" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/transfer_btn"
-                android:layout_width="0dp"
-                android:layout_height="64dp"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
-                android:backgroundTint="@color/primary_button"
-                android:text="Transfer"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                app:cornerRadius="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/withdraw_input_nominal"
-                app:layout_constraintTop_toBottomOf="@+id/withdraw_input_nominal" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/transfer_btn"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/primary_button"
+        android:text="Transfer"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

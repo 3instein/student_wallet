@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class TransferActivity extends AppCompatActivity {
     private Button transfer_btn;
     private TextInputLayout transfer_input_target, transfer_input_nominal;
     private TextView option1, option2, option3;
+    private ImageView transfer_back_btn;
     private int transfer_nominal = 0;
 
     @Override
@@ -32,6 +34,13 @@ public class TransferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer);
         initComponent();
+
+        transfer_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         transfer_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +85,7 @@ public class TransferActivity extends AppCompatActivity {
         option2 = findViewById(R.id.option_2);
         option3 = findViewById(R.id.option_3);
         transfer_btn = findViewById(R.id.transfer_btn);
+        transfer_back_btn = findViewById(R.id.transfer_back_btn);
     }
 
     private void transfer(String target, String transfer_nominal, int id) {
