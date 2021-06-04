@@ -3,6 +3,8 @@ package com.uc.studentwallet;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,12 +22,13 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class TransferActivity extends AppCompatActivity {
 
     private Button transfer_btn;
     private TextInputLayout transfer_input_target, transfer_input_nominal;
-    private TextView option1, option2, option3;
+    private TextView option1, option2, option3, user_balance;
     private ImageView transfer_back_btn;
     private int transfer_nominal = 0;
 
@@ -42,13 +45,39 @@ public class TransferActivity extends AppCompatActivity {
             }
         });
 
+        transfer_input_target.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String username = transfer_input_target.getEditText().getText().toString().trim();
+
+                if (username.isEmpty()) {
+                    transfer_input_target.setError("Student ID cannot be empty!");
+                    transfer_btn.setEnabled(false);
+                } else {
+                    transfer_input_target.setError("");
+                    transfer_btn.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         transfer_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String target = transfer_input_target.getEditText().getText().toString().trim();
-                int transfer_nominal = Integer.parseInt(transfer_input_nominal.getEditText().getText().toString().trim());
+                transfer_nominal = Integer.parseInt(transfer_input_nominal.getEditText().getText().toString().trim());
                 if (MainActivity.balance - 10000 > transfer_nominal) {
                     transfer(target, String.valueOf(transfer_nominal), MainActivity.id);
+                    finish();
                 } else {
                     Toast.makeText(getBaseContext(), "Not Enough Balance", Toast.LENGTH_SHORT).show();
                 }
@@ -80,12 +109,15 @@ public class TransferActivity extends AppCompatActivity {
 
     private void initComponent() {
         transfer_input_target = findViewById(R.id.transfer_input_target);
-        transfer_input_nominal = findViewById(R.id.withdraw_input_nominal);
+        transfer_input_nominal = findViewById(R.id.transfer_input_nominal);
         option1 = findViewById(R.id.option_1);
         option2 = findViewById(R.id.option_2);
         option3 = findViewById(R.id.option_3);
         transfer_btn = findViewById(R.id.transfer_btn);
         transfer_back_btn = findViewById(R.id.transfer_back_btn);
+        user_balance = findViewById(R.id.user_balance);
+        transfer_btn.setEnabled(false);
+        user_balance.setText(String.valueOf(MainActivity.balance));
     }
 
     private void transfer(String target, String transfer_nominal, int id) {
