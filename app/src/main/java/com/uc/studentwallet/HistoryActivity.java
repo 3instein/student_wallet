@@ -2,6 +2,7 @@ package com.uc.studentwallet;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -20,34 +22,38 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import Adapter.HistoryRVAdapter;
+import model.History;
 import model.User;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private User user;
-    private Intent intent;
     private ImageView history_back_btn;
     private RecyclerView history_recyclerView;
-    private TextView test;
+    private HistoryRVAdapter adapter;
+    private ArrayList<History> historyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         initComponent();
+        displayHistory();
 
         String url = "https://student.hackerexperience.net/history.php";
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("id", user.getUser_id());
+            jsonObject.put("id", MainActivity.id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -56,13 +62,22 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONObject userHistory = response.getJSONObject("userHistory");
-                    String message = userHistory.getString("message");
+                    JSONObject historyObject = response.getJSONObject("userHistory");
+                    JSONArray jsonArrayHistory = new JSONArray();
 
-                    if (message.equalsIgnoreCase("success")) {
-                        String type = jsonObject.getString("type");
-                        test.setText(type);
+                    jsonArrayHistory.put(historyObject);
+
+                    for (int i = 0; i < jsonArrayHistory.length(); i++) {
+                        JSONObject userHistory =jsonArrayHistory.getJSONObject(i);
+                        History newHistory = new History();
+                        newHistory.setHistory_id(userHistory.getInt("id"));
+                        newHistory.setUser_id(userHistory.getInt("user_id"));
+                        newHistory.setType(userHistory.getString("type"));
+                        newHistory.setAmount(userHistory.getInt("amount"));
+                        newHistory.setTime(userHistory.getString("time"));
+                        historyList.add(newHistory);
                     }
+                    adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -84,8 +99,15 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void initComponent() {
+        historyList = new ArrayList<>();
+        adapter = new HistoryRVAdapter(historyList);
         history_back_btn = findViewById(R.id.history_back_btn);
         history_recyclerView = findViewById(R.id.history_recyclerView);
-        test = findViewById(R.id.test);
+    }
+
+    private void displayHistory() {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
+        history_recyclerView.setLayoutManager(layoutManager);
+        history_recyclerView.setAdapter(adapter);
     }
 }

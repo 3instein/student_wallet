@@ -10,8 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class HomeFragment extends Fragment {
@@ -56,6 +60,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent = new Intent(view.getContext(), HistoryActivity.class);
+                intent.putExtra("id", data.getInt("id"));
                 startActivity(intent);
             }
         });
@@ -80,5 +85,26 @@ public class HomeFragment extends Fragment {
         String formattedBalance = format.format(balance);
 
         return formattedBalance;
+    }
+
+    public static String dateSplitter(String date) throws ParseException {
+        String[] newDate = date.split("\\s");
+        String oldDate = newDate[0];
+        return dateFormatter(oldDate);
+    }
+
+    public static String dateFormatter(String oldDate) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = dateFormat.parse(oldDate);
+        dateFormat.applyPattern("dd MMMM yyyy");
+        String newDate = dateFormat.format(date);
+
+        SimpleDateFormat newFormat = new SimpleDateFormat("dd MMMM yyyy");
+        Date date1 = newFormat.parse(newDate);
+
+        SimpleDateFormat lastFormat = new SimpleDateFormat("dd MMMM yyyy");
+        String lastDate = lastFormat.format(date1);
+
+        return lastDate;
     }
 }
