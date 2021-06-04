@@ -229,7 +229,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register(User user) {
-        String url = "http://student.hackerexperience.net/register.php";
+        String url = "https://student.hackerexperience.net/register.php";
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

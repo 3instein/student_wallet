@@ -74,7 +74,7 @@ public class WithdrawActivity extends AppCompatActivity {
     }
 
     public void withdraw(int nominal){
-        String url = "http://student.hackerexperience.net/withdraw.php";
+        String url = "https://student.hackerexperience.net/withdraw.php";
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(User user) {
-        String url = "http://student.hackerexperience.net/login.php";
+        String url = "https://student.hackerexperience.net/login.php";
 
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 

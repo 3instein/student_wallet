@@ -79,7 +79,7 @@ public class TransferActivity extends AppCompatActivity {
     }
 
     private void transfer(String target, String transfer_nominal, int id) {
-        String url = "http://student.hackerexperience.net/transfer.php";
+        String url = "https://student.hackerexperience.net/transfer.php";
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

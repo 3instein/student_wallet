@@ -82,7 +82,7 @@ public class TopUpActivity extends AppCompatActivity {
     }
 
     private void topUp(String topUp_nominal) {
-        String url = "http://student.hackerexperience.net/top_up.php";
+        String url = "https://student.hackerexperience.net/top_up.php";
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

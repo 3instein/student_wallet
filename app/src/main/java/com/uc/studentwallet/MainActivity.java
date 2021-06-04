@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getBalance() {
-        String url = "http://student.hackerexperience.net/balance.php";
+        String url = "https://student.hackerexperience.net/balance.php";
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
