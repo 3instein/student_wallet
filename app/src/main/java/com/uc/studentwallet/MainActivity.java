@@ -33,7 +33,7 @@ import model.FInance;
 
 public class MainActivity extends AppCompatActivity {
 
-    static int id = 0, balance = 0, nim = 0;
+    public static int id = 0, balance = 0, nim = 0;
     static String username = "", full_name = "";
 
     private Intent intent;

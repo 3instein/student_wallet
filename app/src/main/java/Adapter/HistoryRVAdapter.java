@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uc.studentwallet.HomeFragment;
+import com.uc.studentwallet.MainActivity;
 import com.uc.studentwallet.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -41,8 +42,11 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.Hist
             e.printStackTrace();
         }
         holder.historyCard_transaction.setText(String.valueOf(HomeFragment.formatter((double) historyData.get(position).getAmount())));
-        holder.historyCard_name.setText(historyData.get(position).getSender());
-        holder.historyCard_nim.setText(historyData.get(position).getNim());
+        if(historyData.get(position).getSender_nim().equalsIgnoreCase(String.valueOf(MainActivity.nim))){
+
+        } else {
+
+        }
         if (historyData.get(position).getTransaction_type().equalsIgnoreCase("transfer")) {
             holder.historyCard_type.setText(historyData.get(position).getTransaction_type());
         } else {
