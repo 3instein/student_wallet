@@ -62,13 +62,13 @@ public class HistoryActivity extends AppCompatActivity {
                             String destination = userHistory.getString("destination");
                             String sender = userHistory.getString("sender");
                             String nim = userHistory.getString("nim");
-                            String amount = String.valueOf(userHistory.getInt("amount"));
+                            int amount = userHistory.getInt("amount");
                             History newHistory = new History(transaction_type, timestamp, destination, sender, nim, amount);
                             historyList.add(newHistory);
                         } else {
                             String transaction_type = userHistory.getString("transaction_type");
                             String timestamp = userHistory.getString("timestamp");
-                            String amount = String.valueOf(userHistory.getInt("amount"));
+                            int amount = userHistory.getInt("amount");
                             History newHistory = new History(transaction_type, timestamp, amount);
                             historyList.add(newHistory);
                         }

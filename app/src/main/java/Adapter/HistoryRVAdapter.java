@@ -35,13 +35,15 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.Hist
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull HistoryViewHolder holder, int position) {
-        holder.historyCard_status.setText(historyData.get(position).getType());
+        holder.historyCard_type.setText(historyData.get(position).getTransaction_type());
         try {
-            holder.historyCard_date.setText(HomeFragment.dateSplitter(historyData.get(position).getTime()));
+            holder.historyCard_date.setText(HomeFragment.dateSplitter(historyData.get(position).getTimestamp()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
         holder.historyCard_transaction.setText(String.valueOf(HomeFragment.formatter((double) historyData.get(position).getAmount())));
+        holder.historyCard_name.setText(historyData.get(position).getSender());
+        holder.historyCard_nim.setText(historyData.get(position).getNim());
     }
 
     @Override
@@ -51,14 +53,14 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.Hist
 
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView historyCard_name, historyCard_nim, historyCard_status, historyCard_transaction, historyCard_date;
+        private TextView historyCard_name, historyCard_nim, historyCard_type, historyCard_transaction, historyCard_date;
 
         public HistoryViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
             historyCard_name = itemView.findViewById(R.id.historyCard_name);
             historyCard_nim = itemView.findViewById(R.id.historyCard_nim);
-            historyCard_status = itemView.findViewById(R.id.historyCard_status);
+            historyCard_type = itemView.findViewById(R.id.historyCard_type);
             historyCard_transaction = itemView.findViewById(R.id.historyCard_transaction);
             historyCard_date = itemView.findViewById(R.id.historyCard_date);
         }

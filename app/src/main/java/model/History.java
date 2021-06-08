@@ -1,18 +1,19 @@
 package model;
 
 public class History {
-    private String transaction_type, timestamp, destination, sender, nim, amount;
+    private String transaction_type, timestamp, destination, sender, nim;
+    private int amount;
 
     public History() {
     }
 
-    public History(String transaction_type, String timestamp, String amount) {
+    public History(String transaction_type, String timestamp, int amount) {
         this.transaction_type = transaction_type;
         this.timestamp = timestamp;
         this.amount = amount;
     }
 
-    public History(String transaction_type, String timestamp, String destination, String sender, String nim, String amount) {
+    public History(String transaction_type, String timestamp, String destination, String sender, String nim, int amount) {
         this.transaction_type = transaction_type;
         this.timestamp = timestamp;
         this.destination = destination;
@@ -53,11 +54,19 @@ public class History {
         this.sender = sender;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getNim() {
+        return nim;
+    }
+
+    public void setNim(String nim) {
+        this.nim = nim;
     }
 }
