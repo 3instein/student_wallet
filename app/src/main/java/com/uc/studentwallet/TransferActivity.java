@@ -1,6 +1,7 @@
 package com.uc.studentwallet;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,7 +23,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
+
+import static com.uc.studentwallet.HomeFragment.formatter;
 
 public class TransferActivity extends AppCompatActivity {
 
@@ -77,6 +79,7 @@ public class TransferActivity extends AppCompatActivity {
                 transfer_nominal = Integer.parseInt(transfer_input_nominal.getEditText().getText().toString().trim());
                 if (MainActivity.balance - 10000 > transfer_nominal) {
                     transfer(target, String.valueOf(transfer_nominal), MainActivity.id);
+                    ((MainActivity) getBaseContext()).getBalance();
                     finish();
                 } else {
                     Toast.makeText(getBaseContext(), "Not Enough Balance", Toast.LENGTH_SHORT).show();
@@ -117,7 +120,7 @@ public class TransferActivity extends AppCompatActivity {
         transfer_back_btn = findViewById(R.id.transfer_back_btn);
         user_balance = findViewById(R.id.user_balance);
         transfer_btn.setEnabled(false);
-        user_balance.setText(String.valueOf(MainActivity.balance));
+        user_balance.setText(String.valueOf(formatter((double) MainActivity.balance)));
     }
 
     private void transfer(String target, String transfer_nominal, int id) {
@@ -129,7 +132,7 @@ public class TransferActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if (response.equalsIgnoreCase("success")) {
                     Toast.makeText(getBaseContext(), "Transfer Success", Toast.LENGTH_SHORT).show();
-                } else if(response.equalsIgnoreCase("invalid nim")){
+                } else if (response.equalsIgnoreCase("invalid nim")) {
                     Toast.makeText(getBaseContext(), "Invalid Student ID", Toast.LENGTH_SHORT).show();
                 }
             }

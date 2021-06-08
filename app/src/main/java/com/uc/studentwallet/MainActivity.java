@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -53,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 Fragment newFragment = null;
-                getBalance();
 
                 if (item.getItemId() == R.id.nav_home) {
                     newFragment = new HomeFragment();
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void initValue() {
         intent = getIntent();
         id = intent.getIntExtra("id", 0);
@@ -90,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
         main_bottom_nav = findViewById(R.id.main_bottom_nav);
     }
 
-    private void getBalance() {
+    public void getBalance() {
         String url = "https://student.hackerexperience.net/balance.php";
-        RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getBaseContext(), "" + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "" + error, Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
