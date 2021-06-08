@@ -77,12 +77,7 @@ public class TransferActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String target = transfer_input_target.getEditText().getText().toString().trim();
                 transfer_nominal = Integer.parseInt(transfer_input_nominal.getEditText().getText().toString().trim());
-                if (MainActivity.balance - 10000 > transfer_nominal) {
-                    transfer(target, String.valueOf(transfer_nominal), MainActivity.id);
-                    finish();
-                } else {
-                    Toast.makeText(getBaseContext(), "Not Enough Balance", Toast.LENGTH_SHORT).show();
-                }
+                transfer(target, String.valueOf(transfer_nominal), MainActivity.id);
             }
         });
 
@@ -131,8 +126,11 @@ public class TransferActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if (response.equalsIgnoreCase("success")) {
                     Toast.makeText(getBaseContext(), "Transfer Success", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else if (response.equalsIgnoreCase("invalid nim")) {
                     Toast.makeText(getBaseContext(), "Invalid Student ID", Toast.LENGTH_SHORT).show();
+                } else if(response.equalsIgnoreCase("balance")){
+                    Toast.makeText(getBaseContext(), "Not enough balance", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

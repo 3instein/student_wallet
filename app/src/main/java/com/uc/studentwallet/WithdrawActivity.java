@@ -70,9 +70,7 @@ public class WithdrawActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int nominal = Integer.parseInt(withdraw_input_nominal.getEditText().getText().toString().trim());
-                if(MainActivity.balance - 10000 > nominal) {
-                    withdraw(nominal);
-                }
+                withdraw(nominal);
             }
         });
     }
@@ -95,11 +93,13 @@ public class WithdrawActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (response.equalsIgnoreCase("success")) {
-                    Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getBaseContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
+                } else if(response.equalsIgnoreCase("balance")){
+                    Toast.makeText(getBaseContext(), "Not enough balance", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
