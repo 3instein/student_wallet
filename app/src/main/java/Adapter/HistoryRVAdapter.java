@@ -42,13 +42,17 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.Hist
             e.printStackTrace();
         }
         holder.historyCard_transaction.setText(String.valueOf(HomeFragment.formatter((double) historyData.get(position).getAmount())));
-        if(historyData.get(position).getSender_nim().equalsIgnoreCase(String.valueOf(MainActivity.nim))){
-            holder.historyCard_type.setText("Outgoing Transfer");
-        } else {
-            holder.historyCard_type.setText("Incoming Transfer");
-        }
         if (historyData.get(position).getTransaction_type().equalsIgnoreCase("transfer")) {
-            holder.historyCard_type.setText(historyData.get(position).getTransaction_type());
+            String check_nim = historyData.get(position).getSender_nim();
+            if(check_nim.equalsIgnoreCase(String.valueOf(MainActivity.nim))){
+                holder.historyCard_name.setText(historyData.get(position).getDestination());
+                holder.historyCard_nim.setText(historyData.get(position).getDestination_nim());
+                holder.historyCard_type.setText("Outgoing Transfer");
+            } else {
+                holder.historyCard_name.setText(historyData.get(position).getSender());
+                holder.historyCard_nim.setText(historyData.get(position).getSender_nim());
+                holder.historyCard_type.setText("Incoming Transfer");
+            }
         } else {
             holder.historyCard_name.setText(historyData.get(position).getTransaction_type());
             holder.historyCard_type.setText("");
