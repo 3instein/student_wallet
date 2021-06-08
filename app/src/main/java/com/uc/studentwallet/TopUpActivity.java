@@ -100,7 +100,7 @@ public class TopUpActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (response.equalsIgnoreCase("success")) {
-                    Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Top up Success", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
