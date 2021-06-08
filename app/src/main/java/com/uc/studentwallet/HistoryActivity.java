@@ -62,13 +62,10 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONObject historyObject = response.getJSONObject("userHistory");
-                    JSONArray jsonArrayHistory = new JSONArray();
-
-                    jsonArrayHistory.put(historyObject);
+                    JSONArray jsonArrayHistory = response.getJSONArray("userHistory");
 
                     for (int i = 0; i < jsonArrayHistory.length(); i++) {
-                        JSONObject userHistory =jsonArrayHistory.getJSONObject(i);
+                        JSONObject userHistory = jsonArrayHistory.getJSONObject(i);
                         History newHistory = new History();
                         newHistory.setHistory_id(userHistory.getInt("id"));
                         newHistory.setUser_id(userHistory.getInt("user_id"));
