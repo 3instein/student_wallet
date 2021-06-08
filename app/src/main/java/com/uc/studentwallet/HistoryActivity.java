@@ -1,25 +1,18 @@
 package com.uc.studentwallet;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -27,12 +20,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import Adapter.HistoryRVAdapter;
 import model.History;
-import model.User;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -66,13 +56,22 @@ public class HistoryActivity extends AppCompatActivity {
 
                     for (int i = 0; i < jsonArrayHistory.length(); i++) {
                         JSONObject userHistory = jsonArrayHistory.getJSONObject(i);
-                        History newHistory = new History();
-                        newHistory.setHistory_id(userHistory.getInt("id"));
-                        newHistory.setUser_id(userHistory.getInt("user_id"));
-                        newHistory.setType(userHistory.getString("type"));
-                        newHistory.setAmount(userHistory.getInt("amount"));
-                        newHistory.setTime(userHistory.getString("time"));
-                        historyList.add(newHistory);
+                        if (userHistory.getString("transaction_type").equalsIgnoreCase("Transfer")) {
+                            String transaction_type = userHistory.getString("transaction_type");
+                            String timestamp = userHistory.getString("timestamp");
+                            String destination = userHistory.getString("destination");
+                            String sender = userHistory.getString("sender");
+                            String nim = userHistory.getString("nim");
+                            String amount = String.valueOf(userHistory.getInt("amount"));
+                            History newHistory = new History(transaction_type, timestamp, destination, sender, nim, amount);
+                            historyList.add(newHistory);
+                        } else {
+                            String transaction_type = userHistory.getString("transaction_type");
+                            String timestamp = userHistory.getString("timestamp");
+                            String amount = String.valueOf(userHistory.getInt("amount"));
+                            History newHistory = new History(transaction_type, timestamp, amount);
+                            historyList.add(newHistory);
+                        }
                     }
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {

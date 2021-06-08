@@ -1,50 +1,63 @@
 package model;
 
 public class History {
-    private int history_id, user_id, amount;
-    private String type, time;
+    private String transaction_type, timestamp, destination, sender, nim, amount;
 
     public History() {
-
     }
 
-    public int getHistory_id() {
-        return history_id;
-    }
-
-    public void setHistory_id(int history_id) {
-        this.history_id = history_id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
+    public History(String transaction_type, String timestamp, String amount) {
+        this.transaction_type = transaction_type;
+        this.timestamp = timestamp;
         this.amount = amount;
     }
 
-    public String getType() {
-        return type;
+    public History(String transaction_type, String timestamp, String destination, String sender, String nim, String amount) {
+        this.transaction_type = transaction_type;
+        this.timestamp = timestamp;
+        this.destination = destination;
+        this.sender = sender;
+        this.nim = nim;
+        this.amount = amount;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String getTransaction_type() {
+        return transaction_type;
     }
 
-    public String getTime() {
-        return time;
+    public void setTransaction_type(String transaction_type) {
+        this.transaction_type = transaction_type;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 }
