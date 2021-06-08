@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -23,15 +25,25 @@ import java.util.Map;
 
 public class WithdrawActivity extends AppCompatActivity {
 
-    TextInputLayout withdraw_input_nominal;
-    Button withdraw_btn;
-    TextView option1, option2, option3;
+    private TextInputLayout withdraw_input_nominal;
+    private Button withdraw_btn;
+    private TextView option1, option2, option3, user_balance;
+    private ImageView withdraw_back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_withdraw);
         initComponent();
+
+        user_balance.setText(HomeFragment.formatter((double) MainActivity.balance));
+
+        withdraw_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         option1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +83,8 @@ public class WithdrawActivity extends AppCompatActivity {
         option1 = findViewById(R.id.option_1);
         option2 = findViewById(R.id.option_2);
         option3 = findViewById(R.id.option_3);
+        withdraw_back_btn = findViewById(R.id.withdraw_back_btn);
+        user_balance = findViewById(R.id.user_balance);
     }
 
     public void withdraw(int nominal){

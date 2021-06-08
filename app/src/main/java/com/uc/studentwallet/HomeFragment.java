@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
     private Intent intent;
     private View view;
     private TextView home_username, home_card_nim, home_card_full_name, home_card_balance;
-    private ImageView home_topUp_btn, home_transfer_btn, home_history_btn;
+    private ImageView home_topUp_btn, home_transfer_btn, home_history_btn, home_withdraw_btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +67,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        home_withdraw_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(view.getContext(), WithdrawActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
@@ -78,6 +86,7 @@ public class HomeFragment extends Fragment {
         home_topUp_btn = view.findViewById(R.id.home_topUp_btn);
         home_transfer_btn = view.findViewById(R.id.home_transfer_btn);
         home_history_btn = view.findViewById(R.id.home_history_btn);
+        home_withdraw_btn = view.findViewById(R.id.home_withdraw_btn);
     }
 
     public static String formatter(double balance) {
