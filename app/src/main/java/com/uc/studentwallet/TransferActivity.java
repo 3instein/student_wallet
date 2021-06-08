@@ -79,7 +79,6 @@ public class TransferActivity extends AppCompatActivity {
                 transfer_nominal = Integer.parseInt(transfer_input_nominal.getEditText().getText().toString().trim());
                 if (MainActivity.balance - 10000 > transfer_nominal) {
                     transfer(target, String.valueOf(transfer_nominal), MainActivity.id);
-                    ((MainActivity) getBaseContext()).getBalance();
                     finish();
                 } else {
                     Toast.makeText(getBaseContext(), "Not Enough Balance", Toast.LENGTH_SHORT).show();

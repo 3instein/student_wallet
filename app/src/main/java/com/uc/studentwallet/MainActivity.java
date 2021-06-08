@@ -1,6 +1,7 @@
 package com.uc.studentwallet;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -15,14 +16,20 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import model.FInance;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     newFragment.setArguments(data);
                 } else if (item.getItemId() == R.id.nav_finance) {
                     newFragment = new FinanceFragment();
+                    getFinance();
                 } else if (item.getItemId() == R.id.nav_profile) {
 
                 }
@@ -93,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getBalance() {
         String url = "https://student.hackerexperience.net/balance.php";
-        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -103,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "" + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "" + error, Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -115,5 +123,48 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
+    }
+
+    public void getFinance() {
+        String url = "https://student.hackerexperience.net/finance.php";
+        RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id", MainActivity.id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArrayFinance = response.getJSONArray("userFinance");
+
+                    for (int i = 0; i < jsonArrayFinance.length(); i++) {
+                        JSONObject userFinance = jsonArrayFinance.getJSONObject(i);
+                        FInance fInance = new FInance();
+                        fInance.setFinance_id(userFinance.getInt("id"));
+                        fInance.setUser_id(userFinance.getInt("user_id"));
+                        fInance.setAmount(userFinance.getInt("amount"));
+                        fInance.setStatus(userFinance.getString("status"));
+
+                        FinanceFragment financeFragment = (FinanceFragment) getSupportFragmentManager().getFragments().get(1);
+                        financeFragment.addFinanceList(fInance);
+                    }
+                    FinanceFragment financeFragment = (FinanceFragment) getSupportFragmentManager().getFragments().get(1);
+                    financeFragment.adapterNotify();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
     }
 }

@@ -48,7 +48,7 @@ public class HistoryActivity extends AppCompatActivity {
         initComponent();
         displayHistory();
 
-        String url = "https://student.hackerexperience.net/history.php";
+        String url = "https://student.hackerexperience.net/transaction.php";
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 
         JSONObject jsonObject = new JSONObject();
