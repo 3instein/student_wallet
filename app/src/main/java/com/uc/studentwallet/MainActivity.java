@@ -142,14 +142,14 @@ public class MainActivity extends AppCompatActivity {
 
                     for (int i = 0; i < jsonArrayFinance.length(); i++) {
                         JSONObject userFinance = jsonArrayFinance.getJSONObject(i);
-                        Finance fInance = new Finance();
-                        fInance.setFinance_id(userFinance.getInt("id"));
-                        fInance.setUser_id(userFinance.getInt("user_id"));
-                        fInance.setAmount(userFinance.getInt("amount"));
-                        fInance.setStatus(userFinance.getString("status"));
+                        Finance finance = new Finance();
+                        finance.setFinance_id(userFinance.getInt("id"));
+                        finance.setUser_id(userFinance.getInt("user_id"));
+                        finance.setAmount(userFinance.getInt("amount"));
+                        finance.setStatus(userFinance.getString("status"));
 
                         FinanceFragment financeFragment = (FinanceFragment) getSupportFragmentManager().getFragments().get(1);
-                        financeFragment.addFinanceList(fInance);
+                        financeFragment.addFinanceList(finance);
                     }
                     FinanceFragment financeFragment = (FinanceFragment) getSupportFragmentManager().getFragments().get(1);
                     financeFragment.adapterNotify();

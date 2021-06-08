@@ -27,6 +27,10 @@ public class FinanceFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_finance, container, false);
         initComponent();
         displayFinance();
+        Finance finance = new Finance();
+        finance.setFinance_id(1);
+        finance.setAmount(100);
+        finance.setStatus("test");
 
         return view;
     }
@@ -43,8 +47,8 @@ public class FinanceFragment extends Fragment {
         finance_recycleView.setAdapter(adapter);
     }
 
-    public void addFinanceList(Finance fInance) {
-        financeList.add(fInance);
+    public void addFinanceList(Finance finance) {
+        financeList.add(finance);
     }
 
     public void adapterNotify() {
