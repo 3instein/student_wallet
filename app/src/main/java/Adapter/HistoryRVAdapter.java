@@ -35,7 +35,6 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.Hist
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull HistoryViewHolder holder, int position) {
-        holder.historyCard_type.setText(historyData.get(position).getTransaction_type());
         try {
             holder.historyCard_date.setText(HomeFragment.dateSplitter(historyData.get(position).getTimestamp()));
         } catch (ParseException e) {
@@ -44,6 +43,12 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.Hist
         holder.historyCard_transaction.setText(String.valueOf(HomeFragment.formatter((double) historyData.get(position).getAmount())));
         holder.historyCard_name.setText(historyData.get(position).getSender());
         holder.historyCard_nim.setText(historyData.get(position).getNim());
+        if (historyData.get(position).getTransaction_type().equalsIgnoreCase("transfer")) {
+            holder.historyCard_type.setText(historyData.get(position).getTransaction_type());
+        } else {
+            holder.historyCard_name.setText(historyData.get(position).getTransaction_type());
+            holder.historyCard_type.setText("");
+        }
     }
 
     @Override
