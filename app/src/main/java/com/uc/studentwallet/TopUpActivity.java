@@ -55,7 +55,7 @@ public class TopUpActivity extends AppCompatActivity {
 
                 if (MainActivity.balance - 10000 > topUp_nominal) {
                     topUp(String.valueOf(topUp_nominal));
-                    MainActivity.balance += topUp_nominal;
+                    finish();
                 }
             }
         });
@@ -113,6 +113,7 @@ public class TopUpActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> data = new HashMap<>();
+                data.put("username", MainActivity.username);
                 data.put("topUp_nominal", topUp_nominal);
 
                 return data;

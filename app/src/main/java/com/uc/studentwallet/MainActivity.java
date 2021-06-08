@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Intent intent;
     private BottomNavigationView main_bottom_nav;
+    private ArrayList<Finance> tempFinance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +74,10 @@ public class MainActivity extends AppCompatActivity {
                     newFragment.setArguments(data);
                 } else if (item.getItemId() == R.id.nav_finance) {
                     newFragment = new FinanceFragment();
-                    getFinance();
                 } else if (item.getItemId() == R.id.nav_profile) {
 
                 }
+                getBalance();
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, newFragment).commit();
 
                 return true;
@@ -91,13 +93,14 @@ public class MainActivity extends AppCompatActivity {
         nim = intent.getIntExtra("nim", 0);
         username = intent.getStringExtra("username");
         full_name = intent.getStringExtra("full_name");
+        tempFinance = new ArrayList<>();
     }
 
     private void initComponent() {
         main_bottom_nav = findViewById(R.id.main_bottom_nav);
     }
 
-    public void getBalance() {
+    private void getBalance() {
         String url = "https://student.hackerexperience.net/balance.php";
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 
@@ -121,48 +124,5 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-    }
-
-    public void getFinance() {
-        String url = "https://student.hackerexperience.net/finance.php";
-        RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
-
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("id", MainActivity.id);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray jsonArrayFinance = response.getJSONArray("userFinance");
-
-                    for (int i = 0; i < jsonArrayFinance.length(); i++) {
-                        JSONObject userFinance = jsonArrayFinance.getJSONObject(i);
-                        Finance finance = new Finance();
-                        finance.setFinance_id(userFinance.getInt("id"));
-                        finance.setUser_id(userFinance.getInt("user_id"));
-                        finance.setAmount(userFinance.getInt("amount"));
-                        finance.setStatus(userFinance.getString("status"));
-
-                        FinanceFragment financeFragment = (FinanceFragment) getSupportFragmentManager().getFragments().get(1);
-                        financeFragment.addFinanceList(finance);
-                    }
-                    FinanceFragment financeFragment = (FinanceFragment) getSupportFragmentManager().getFragments().get(1);
-                    financeFragment.adapterNotify();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        requestQueue.add(jsonObjectRequest);
     }
 }
