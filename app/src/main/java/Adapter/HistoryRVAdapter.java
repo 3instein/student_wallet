@@ -56,6 +56,7 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.Hist
         } else {
             holder.historyCard_name.setText(historyData.get(position).getTransaction_type());
             holder.historyCard_type.setText("");
+            holder.historyCard_nim.setText("");
         }
     }
 

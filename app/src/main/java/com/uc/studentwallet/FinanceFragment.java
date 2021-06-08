@@ -13,14 +13,14 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import Adapter.FinanceRVAdapter;
-import model.FInance;
+import model.Finance;
 
 public class FinanceFragment extends Fragment {
 
     private View view;
     private RecyclerView finance_recycleView;
     private FinanceRVAdapter adapter;
-    private ArrayList<FInance> financeList;
+    private ArrayList<Finance> financeList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class FinanceFragment extends Fragment {
         finance_recycleView.setAdapter(adapter);
     }
 
-    public void addFinanceList(FInance fInance) {
+    public void addFinanceList(Finance fInance) {
         financeList.add(fInance);
     }
 

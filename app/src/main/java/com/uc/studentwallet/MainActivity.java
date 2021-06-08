@@ -1,13 +1,11 @@
 package com.uc.studentwallet;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -29,7 +27,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.FInance;
+import model.Finance;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -144,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
                     for (int i = 0; i < jsonArrayFinance.length(); i++) {
                         JSONObject userFinance = jsonArrayFinance.getJSONObject(i);
-                        FInance fInance = new FInance();
+                        Finance fInance = new Finance();
                         fInance.setFinance_id(userFinance.getInt("id"));
                         fInance.setUser_id(userFinance.getInt("user_id"));
                         fInance.setAmount(userFinance.getInt("amount"));

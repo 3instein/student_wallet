@@ -9,22 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.uc.studentwallet.MainActivity;
 import com.uc.studentwallet.R;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import model.FInance;
+import model.Finance;
 
 import static com.uc.studentwallet.HomeFragment.formatter;
 
 public class FinanceRVAdapter extends RecyclerView.Adapter<FinanceRVAdapter.FinanceViewHolder> {
 
-    private static ArrayList<FInance> financeData;
+    private static ArrayList<Finance> financeData;
 
-    public FinanceRVAdapter(ArrayList<FInance> financeData) {
+    public FinanceRVAdapter(ArrayList<Finance> financeData) {
         this.financeData = financeData;
     }
 

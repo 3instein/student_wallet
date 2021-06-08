@@ -1,11 +1,11 @@
 package model;
 
-public class FInance {
+public class Finance {
 
     private int finance_id, user_id, amount;
     private String status;
 
-    public FInance() {
+    public Finance() {
 
     }
 
