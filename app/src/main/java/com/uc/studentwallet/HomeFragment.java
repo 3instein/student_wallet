@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
 
         if (data != null) {
             home_username.setText(data.getString("username"));
-            home_card_nim.setText(String.valueOf(data.getInt("nim")));
+            home_card_nim.setText(String.valueOf(MainActivity.nim));
             home_card_balance.setText(formatter((double) MainActivity.balance));
             home_card_full_name.setText(data.getString("full_name"));
         }

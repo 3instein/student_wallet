@@ -43,9 +43,9 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.Hist
         }
         holder.historyCard_transaction.setText(String.valueOf(HomeFragment.formatter((double) historyData.get(position).getAmount())));
         if(historyData.get(position).getSender_nim().equalsIgnoreCase(String.valueOf(MainActivity.nim))){
-
+            holder.historyCard_type.setText("Outgoing Transfer");
         } else {
-
+            holder.historyCard_type.setText("Incoming Transfer");
         }
         if (historyData.get(position).getTransaction_type().equalsIgnoreCase("transfer")) {
             holder.historyCard_type.setText(historyData.get(position).getTransaction_type());
