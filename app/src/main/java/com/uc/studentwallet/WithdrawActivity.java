@@ -93,10 +93,7 @@ public class WithdrawActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (response.equalsIgnoreCase("success")) {
-                    Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(getBaseContext(), LoginActivity.class);
-                    startActivity(intent);
+                    Toast.makeText(getBaseContext(), "Withdraw Success", Toast.LENGTH_SHORT).show();
                     finish();
                 } else if(response.equalsIgnoreCase("balance")){
                     Toast.makeText(getBaseContext(), "Not enough balance", Toast.LENGTH_SHORT).show();

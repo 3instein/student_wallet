@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView login_signup_text;
     TextInputLayout login_input_username, login_input_password;
     Button login_btn;
+    int stay_logged_in = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +154,16 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("nim", userDetail.getInt("nim"));
                         intent.putExtra("full_name", userDetail.getString("full_name"));
                         intent.putExtra("username", userDetail.getString("username"));
+                        if(stay_logged_in == 1) {
+                            String username = user.getUsername();
+                            String password = user.getPassword();
+                            SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
+                            SharedPreferences.Editor Ed = sp.edit();
+                            Ed.putString("username", username );
+                            Ed.putString("password", password);
+                            Ed.commit();
+                        }
+
                         startActivity(intent);
                         finish();
                     } else if (message.equals("invalid")) {
