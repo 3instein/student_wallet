@@ -20,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import Adapter.HistoryRVAdapter;
+
 public class HomeFragment extends Fragment {
 
     private Intent intent;

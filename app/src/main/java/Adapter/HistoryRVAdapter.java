@@ -1,11 +1,13 @@
 package Adapter;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uc.studentwallet.HomeFragment;
@@ -37,14 +39,17 @@ public class HistoryRVAdapter extends RecyclerView.Adapter<HistoryRVAdapter.Hist
     @Override
     public void onBindViewHolder(@NonNull @NotNull HistoryViewHolder holder, int position) {
         try {
-            holder.historyCard_date.setText(HomeFragment.dateSplitter(historyData.get(position).getTimestamp()));
+            if (holder.historyCard_date.equals(HomeFragment.dateSplitter(historyData.get(position).getTimestamp()))) {
+            } else {
+                holder.historyCard_date.setText(HomeFragment.dateSplitter(historyData.get(position).getTimestamp()));
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
         holder.historyCard_transaction.setText(String.valueOf(HomeFragment.formatter((double) historyData.get(position).getAmount())));
         if (historyData.get(position).getTransaction_type().equalsIgnoreCase("transfer")) {
             String check_nim = historyData.get(position).getSender_nim();
-            if(check_nim.equalsIgnoreCase(String.valueOf(MainActivity.nim))){
+            if (check_nim.equalsIgnoreCase(String.valueOf(MainActivity.nim))) {
                 holder.historyCard_name.setText(historyData.get(position).getDestination());
                 holder.historyCard_nim.setText(historyData.get(position).getDestination_nim());
                 holder.historyCard_type.setText("Outgoing Transfer");
