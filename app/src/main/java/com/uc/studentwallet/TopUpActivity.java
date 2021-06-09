@@ -52,11 +52,7 @@ public class TopUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 topUp_nominal = Integer.parseInt(topUp_input_nominal.getEditText().getText().toString().trim());
-
-                if (MainActivity.balance - 10000 > topUp_nominal) {
-                    topUp(String.valueOf(topUp_nominal));
-                    finish();
-                }
+                topUp(String.valueOf(topUp_nominal));
             }
         });
 
