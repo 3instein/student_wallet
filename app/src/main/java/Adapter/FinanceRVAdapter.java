@@ -57,8 +57,7 @@ public class FinanceRVAdapter extends RecyclerView.Adapter<FinanceRVAdapter.Fina
             public void onClick(View v) {
                 if(holder.finance_status.getText().equals("Unpaid")) {
                     payFinance(Integer.parseInt((String) holder.finance_id.getText()), v);
-                } else {
-                    Toast.makeText(v.getContext(), "Already paid!", Toast.LENGTH_SHORT).show();
+                    holder.finance_btn.setVisibility(View.INVISIBLE);
                 }
             }
         });

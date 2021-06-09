@@ -38,7 +38,10 @@ public class ForgotActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String username = forgot_username.getEditText().getText().toString().trim();
+                intent = new Intent(getBaseContext(), ForgotActivity2.class);
                 getToken(username);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -50,7 +53,7 @@ public class ForgotActivity extends AppCompatActivity {
         forgot_username = findViewById(R.id.forgot_username);
     }
 
-    private void getToken(String username){
+    private void getToken(String username) {
         String url = "https://student.hackerexperience.net/forgot.php";
         RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
 
@@ -61,7 +64,7 @@ public class ForgotActivity extends AppCompatActivity {
                     intent = new Intent(getBaseContext(), ForgotActivity2.class);
                     startActivity(intent);
                     finish();
-                } else if(response.equalsIgnoreCase("no data")){
+                } else if (response.equalsIgnoreCase("no data")) {
                     Toast.makeText(getBaseContext(), "Invalid Username", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -84,7 +87,5 @@ public class ForgotActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
-
     }
-
 }

@@ -31,7 +31,7 @@ import model.User;
 public class LoginActivity extends AppCompatActivity {
 
     private Intent intent;
-    private TextView login_signup_text;
+    private TextView login_signup_text, login_forgot_password;
     private TextInputLayout login_input_username, login_input_password;
     private Button login_btn;
     private CheckBox stay_logged_in_checker;
@@ -114,6 +114,14 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        login_forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getBaseContext(), ForgotActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initComponent() {
@@ -122,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
         login_input_password = findViewById(R.id.login_input_password);
         login_btn = findViewById(R.id.login_btn);
         stay_logged_in_checker = findViewById(R.id.stay_logged_in_checker);
+        login_forgot_password = findViewById(R.id.login_forgot_password);
     }
 
     private void createNewAccountBtn() {

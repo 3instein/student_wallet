@@ -48,6 +48,7 @@ public class ForgotActivity2 extends AppCompatActivity {
                 String new_password = forgot2_new_password.getEditText().getText().toString().trim();
 
                 resetPassword(token, new_password);
+                finish();
             }
         });
     }
