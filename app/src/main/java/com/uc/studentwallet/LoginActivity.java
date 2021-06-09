@@ -107,7 +107,11 @@ public class LoginActivity extends AppCompatActivity {
         stay_logged_in_checker.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                stay_logged_in = 1;
+                if(((CompoundButton) buttonView).isChecked()){
+                    stay_logged_in = 1;
+                } else {
+                    stay_logged_in = 0;
+                }
             }
         });
     }
