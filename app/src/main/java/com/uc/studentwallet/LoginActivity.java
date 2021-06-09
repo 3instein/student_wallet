@@ -1,6 +1,5 @@
-    package com.uc.studentwallet;
+package com.uc.studentwallet;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,33 +10,31 @@ import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import model.User;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Intent intent;
-    TextView login_signup_text;
-    TextInputLayout login_input_username, login_input_password;
-    Button login_btn;
+    private Intent intent;
+    private TextView login_signup_text;
+    private TextInputLayout login_input_username, login_input_password;
+    private Button login_btn;
+    private CheckBox stay_logged_in_checker;
     int stay_logged_in = 0;
 
     @Override
@@ -106,6 +103,13 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        stay_logged_in_checker.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                stay_logged_in = 1;
+            }
+        });
     }
 
     private void initComponent() {
@@ -113,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
         login_input_username = findViewById(R.id.login_input_username);
         login_input_password = findViewById(R.id.login_input_password);
         login_btn = findViewById(R.id.login_btn);
+        stay_logged_in_checker = findViewById(R.id.stay_logged_in_checker);
     }
 
     private void createNewAccountBtn() {
@@ -154,12 +159,12 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("nim", userDetail.getInt("nim"));
                         intent.putExtra("full_name", userDetail.getString("full_name"));
                         intent.putExtra("username", userDetail.getString("username"));
-                        if(stay_logged_in == 1) {
+                        if (stay_logged_in == 1) {
                             String username = user.getUsername();
                             String password = user.getPassword();
                             SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
                             SharedPreferences.Editor Ed = sp.edit();
-                            Ed.putString("username", username );
+                            Ed.putString("username", username);
                             Ed.putString("password", password);
                             Ed.commit();
                         }
