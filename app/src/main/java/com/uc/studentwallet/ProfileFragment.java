@@ -19,6 +19,7 @@ public class ProfileFragment extends Fragment {
     private TextView profile_full_name, profile_nim;
     private Button profile_log_out;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
@@ -30,7 +31,11 @@ public class ProfileFragment extends Fragment {
         profile_log_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences preferences = v.getContext().getSharedPreferences("Login", 0);
+                preferences.edit().remove("username").commit();
+                preferences.edit().remove("password").commit();
                 intent = new Intent(view.getContext(), LoginActivity.class);
+                startActivity(intent);
             }
         });
 
