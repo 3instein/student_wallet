@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_finance) {
                     newFragment = new FinanceFragment();
                 } else if (item.getItemId() == R.id.nav_profile) {
-
+                    newFragment = new ProfileFragment();
                 }
                 getBalance();
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, newFragment).commit();
